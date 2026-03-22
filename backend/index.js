@@ -7,7 +7,18 @@ import cors from "cors";
 
 const app = express()
    const corsOptions = {
-     origin: '*',
+     origin: function (origin, callback) {
+       const allowedOrigins = [
+         'https://snip-link-tau.vercel.app',
+         'http://localhost:3000'
+       ];
+       
+       if (allowedOrigins.includes(origin) || !origin) {
+         callback(null, true);
+       } else {
+         callback(new Error('CORS not allowed'));
+       }
+     },
      credentials: false,
      optionsSuccessStatus: 200,
      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
