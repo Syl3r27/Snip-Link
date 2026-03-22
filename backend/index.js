@@ -21,15 +21,13 @@ app.use(express.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT ?? 8000
 
-app.use(express.json());
-app.use(authenticationMiddleware);
-
 app.get('/',(req,res)=>{
     return res.json({status : "Server is up and running..."})
 })
 
-
 app.use('/user',userRouter);
+
+app.use(authenticationMiddleware);
 app.use(urlRouter)
 
 app.listen(PORT,()=>{
