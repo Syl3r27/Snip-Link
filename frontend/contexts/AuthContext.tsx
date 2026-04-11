@@ -66,8 +66,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const token = res.token;
       localStorage.setItem("token", token);
 
+      // Decode JWT to get user ID
+      const tokenParts = token.split('.');
+      const payload = JSON.parse(atob(tokenParts[1]));
+
       const userData: User = {
-        id: token,
+        id: payload.id,
         email,
         name: email.split("@")[0],
       };

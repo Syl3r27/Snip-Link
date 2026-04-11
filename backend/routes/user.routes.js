@@ -50,7 +50,7 @@ router.post('/login',async(req,res)=>{
     const user = await getUserByEmail(email)
 
     if(!user){
-        return res.status(400).json({error:`User with email ${email} doest not exists`})
+        return res.status(400).json({error:`User with email ${email} does not exist`})
     }
 
     const{password:hashedPassword} = hashPasswordWithSalt(password, user.salt)
